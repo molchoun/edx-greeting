@@ -2,10 +2,10 @@
 Database models for edx_greeting.
 """
 # from django.db import models
-from model_utils.models import TimeStampedModel
+from django.db import models
 
 
-class Greeting(TimeStampedModel):
+class Greeting(models.Model):
     """
     TODO: replace with a brief description of the model.
 
@@ -14,11 +14,12 @@ class Greeting(TimeStampedModel):
     https://open-edx-proposals.readthedocs.io/en/latest/oep-0030-arch-pii-markup-and-auditing.html
     """
 
-    # TODO: add field definitions
+    text = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """
         Get a string representation of this model instance.
         """
         # TODO: return a string appropriate for the data fields
-        return '<Greeting, ID: {}>'.format(self.id)
+        return self.text

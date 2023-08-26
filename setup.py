@@ -117,7 +117,7 @@ def is_requirement(line):
     return line and line.strip() and not line.startswith(("-r", "#", "-e", "git+", "-c"))
 
 
-VERSION = get_version('edx_greeting', '__init__.py')
+VERSION = get_version('edx_greeting', 'settings/__init__.py')
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
@@ -150,11 +150,19 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
-        'Framework :: Django :: 3.2',
+        'Framework :: Django :: 4.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.10',
     ],
+    entry_points={
+            # IMPORTANT: ensure that this entry_points coincides with that of edx-platform
+            #            and also that you are not introducing any name collisions.
+            # https://github.com/edx/edx-platform/blob/master/setup.py#L88
+            "lms.djangoapp": [
+                "edx-greeting = edx_greeting.apps:EdxGreetingConfig",
+            ],
+        },
 )
