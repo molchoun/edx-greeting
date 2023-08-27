@@ -162,7 +162,7 @@ setup(
             #            and also that you are not introducing any name collisions.
             # https://github.com/edx/edx-platform/blob/master/setup.py#L88
             "lms.djangoapp": [
-                "edx-greeting = edx_greeting.apps:EdxGreetingConfig",
+                "edx_greeting = edx_greeting.apps:EdxGreetingConfig",
             ],
         },
 )
