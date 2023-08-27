@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_protect
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from serializers import GreetingSerializer
+from edx_greeting.serializers import GreetingSerializer
 
 logger = logging.getLogger(__name__)
 

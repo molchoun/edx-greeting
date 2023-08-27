@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Greeting
+from edx_greeting.models import Greeting
 
 
 class GreetingSerializer(serializers.ModelSerializer):
