@@ -19,7 +19,6 @@ class EdxGreetingConfig(AppConfig):
             'lms.djangoapp': {
                 PluginURLs.NAMESPACE: name,
                 PluginURLs.APP_NAME: name,
-                PluginURLs.REGEX: "^edx-greeting/",
                 PluginURLs.RELATIVE_PATH: "urls",
             }
         },

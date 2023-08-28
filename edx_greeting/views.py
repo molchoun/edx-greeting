@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import logging
-from oauth import oauth
+from edx_greeting.oauth import oauth
 from django.views.decorators.csrf import csrf_protect
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
@@ -23,6 +23,7 @@ def authorize(request):
     # Here, we authenticate the client with the token we got from the LMS. In a real-world
     # application, we'd save this token somehow for subsequent requests.
     username = request.user.username
+
 
     token = lms.authorize_access_token(request)
     # And then, we use this token to fetch the user's info.
@@ -47,14 +48,20 @@ class GreetingView(APIView):
         oauth.lms.authorize_redirect(request, redirect_uri, state=state)
 
     def post(self, request):
-        state = request.GET.get('state')
+        logger.info(f"\n{'='*30}aasgasg!!!!!!!!!!!!!!!!")
+        state = request.POST.get('state')
         redirect_uri = request.build_absolute_uri('/greeting')
-        print(redirect_uri)
+        logger.info(f"\n{'=' * 20}\nredirect_url: {redirect_uri}")
         oauth.lms.authorize_redirect(request, redirect_uri)
         lms = oauth.create_client('lms')
+        logger.info(f"\n{'=' * 20}\nauthorized")
         username = request.user.username
+        logger.info(f"\n{'='*20 }\n user: {username}")
+
+        logger.info(f"\n{'=' * 20}\nstate: {state}")
 
         token = lms.authorize_access_token(request)
+        logger.info(f"\n{'='*20 }\ntoken: {token}")
         response = lms.get(f'/api/user/v1/accounts/{username}', token=token)
         response.raise_for_status()
 
