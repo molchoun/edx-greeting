@@ -31,14 +31,17 @@ def plugin_settings(settings):
     settings.CORS_ORIGIN_ALLOW_ALL = True
 
     settings.REST_FRAMEWORK = {
-        'DEFAULT_PERMISSION_CLASSES': [
-            'rest_framework.permissions.AllowAny'
-        ],
-        'DEFAULT_RENDERER_CLASSES': [
-            'rest_framework.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
-        ]
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        ),
+        # ...
     }
+
+    settings.OAUTH2_PROVIDER = {
+        'ACCESS_TOKEN_EXPIRE_SECONDS': 3600,  # Set the token expiration time as needed
+        'APPLICATION_MODEL': 'oauth2_provider.Application',  # Point to your Application model
+    }
+
     settings.AUTHLIB_OAUTH_CLIENTS = {
         'lms': {
             # Set your own client_id and secret from the LMS here.
