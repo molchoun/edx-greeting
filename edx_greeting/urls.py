@@ -22,7 +22,7 @@ urlpatterns = [
     path('', views.login, name='index'),
     path('authorize/', views.authorize),
     path('api/greeting/', csrf_exempt(views.GreetingView.as_view())),
-    path('o/', include((oauth2_endpoint_views, 'oauth2_provider'), namespace="oauth2_provider")),
+    path("o/", include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 
