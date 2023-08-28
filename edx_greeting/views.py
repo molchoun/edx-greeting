@@ -1,10 +1,11 @@
-from django.shortcuts import render
 import logging
-from edx_greeting.oauth import oauth
+
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
-from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from oauth2_provider.views.generic import ProtectedResourceView
+from edx_greeting.oauth import oauth
 from edx_greeting.serializers import GreetingSerializer
 
 logger = logging.getLogger(__name__)
@@ -24,7 +25,6 @@ def authorize(request):
     # application, we'd save this token somehow for subsequent requests.
     username = request.user.username
 
-
     token = lms.authorize_access_token(request)
     # And then, we use this token to fetch the user's info.
     response = lms.get(f'/api/user/v1/accounts/{username}', token=token)
@@ -42,7 +42,7 @@ def authorize(request):
     return render(request, 'authorize.html', {'profile': profile, 'msg': msg})
 
 
-class GreetingView(APIView):
+class GreetingView(ProtectedResourceView):
     def perform_recursive_call(self, request, state):
         redirect_uri = request.build_absolute_uri('/greeting')
         oauth.lms.authorize_redirect(request, redirect_uri, state=state)

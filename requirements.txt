@@ -4,3 +4,5 @@ setuptools~=68.0.0
 django-model-utils~=4.3.1
 djangorestframework~=3.14.0
 Authlib~=1.2.1
+
+django-oauth-toolkit~=2.3.0
