@@ -81,3 +81,5 @@ def plugin_settings(settings):
         u'http://local.overhang.io:8000',
         u'http://local.overhang.io:8000/greeting/'
     )
+
+    settings.INSTALLED_APPS.extend('oauth2_provider')
