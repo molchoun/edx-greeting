@@ -161,7 +161,7 @@ setup(
             # IMPORTANT: ensure that this entry_points coincides with that of edx-platform
             #            and also that you are not introducing any name collisions.
             # https://github.com/edx/edx-platform/blob/master/setup.py#L88
-            "lms.djangoapp": [
+            "tutor.plugin.v1": [
                 "edx_greeting = edx_greeting.apps:EdxGreetingConfig",
             ],
         },
